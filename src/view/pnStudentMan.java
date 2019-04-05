@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.StudentController;
 import view.*;
 
 /**
@@ -18,6 +19,8 @@ public class pnStudentMan extends javax.swing.JPanel {
      */
     public pnStudentMan() {
         initComponents();
+        StudentController studentController = new StudentController(tbStudent, tfSearch, btAdd, btExport);
+        studentController.loadData();
     }
 
     /**
@@ -35,6 +38,9 @@ public class pnStudentMan extends javax.swing.JPanel {
         tfSearch = new javax.swing.JTextField();
         btExport = new javax.swing.JButton();
         btAdd = new javax.swing.JButton();
+        pnCenter = new javax.swing.JPanel();
+        scrollPane = new javax.swing.JScrollPane();
+        tbStudent = new javax.swing.JTable();
 
         jTextField1.setText("jTextField1");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -42,6 +48,8 @@ public class pnStudentMan extends javax.swing.JPanel {
                 jTextField1ActionPerformed(evt);
             }
         });
+
+        setLayout(new java.awt.BorderLayout());
 
         pnTop1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 1, 13, 1)));
 
@@ -108,24 +116,32 @@ public class pnStudentMan extends javax.swing.JPanel {
         pnTopLayout.setVerticalGroup(
             pnTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTopLayout.createSequentialGroup()
-                .addGap(0, 1, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(pnTop1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnTop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(pnTop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(164, Short.MAX_VALUE))
-        );
+        add(pnTop, java.awt.BorderLayout.PAGE_START);
+
+        pnCenter.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 1, 1, 1));
+        pnCenter.setLayout(new java.awt.BorderLayout(30, 30));
+
+        tbStudent.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        scrollPane.setViewportView(tbStudent);
+
+        pnCenter.add(scrollPane, java.awt.BorderLayout.CENTER);
+
+        add(pnCenter, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -149,8 +165,11 @@ public class pnStudentMan extends javax.swing.JPanel {
     private javax.swing.JButton btAdd;
     private javax.swing.JButton btExport;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JPanel pnCenter;
     private javax.swing.JPanel pnTop;
     private javax.swing.JPanel pnTop1;
+    private javax.swing.JScrollPane scrollPane;
+    private javax.swing.JTable tbStudent;
     private javax.swing.JTextField tfSearch;
     // End of variables declaration//GEN-END:variables
 }
