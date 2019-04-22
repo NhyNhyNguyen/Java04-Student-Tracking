@@ -13,8 +13,8 @@ public enum StudentStatus {
     WAITING("Đợi khóa sau"),
     INPROGRESS("Đang theo học"),
     DONE("Đã hoàn thành"),
-    DISCARD("Tạm dừng");
-
+    DISCARD("Tạm dừng"),
+    UNDEFINE("Chưa xác định");
     private String value;
 
     private StudentStatus(final String value) {
@@ -23,5 +23,23 @@ public enum StudentStatus {
 
     public String getValue() {
         return value;
+    }
+    public static StudentStatus getNameFromValue(final String valueof) {
+        StudentStatus status = StudentStatus.UNDEFINE;
+        switch (valueof) {
+            case "Đợi khóa sau":
+                status = StudentStatus.WAITING;
+                break;
+            case "Đang theo học":
+                status = StudentStatus.INPROGRESS;
+                break;
+            case "Đã hoàn thành":
+                status = StudentStatus.DONE;
+                break;
+            case "Tạm dừng":
+                status = StudentStatus.DISCARD;
+                break;
+        }
+        return status;
     }
 }

@@ -19,8 +19,10 @@ public class pnStudentMan extends javax.swing.JPanel {
      */
     public pnStudentMan() {
         initComponents();
-        StudentController studentController = new StudentController(tbStudent, tfSearch, btAdd, btExport);
+        StudentController studentController = new StudentController(tbStudent, tfSearch, btAdd, btExport,lbEventInfo);
         studentController.loadData();
+        studentController.cssWithTable();
+        studentController.setEvent();
     }
 
     /**
@@ -38,6 +40,7 @@ public class pnStudentMan extends javax.swing.JPanel {
         tfSearch = new javax.swing.JTextField();
         btExport = new javax.swing.JButton();
         btAdd = new javax.swing.JButton();
+        lbEventInfo = new javax.swing.JLabel();
         pnCenter = new javax.swing.JPanel();
         scrollPane = new javax.swing.JScrollPane();
         tbStudent = new javax.swing.JTable();
@@ -83,6 +86,9 @@ public class pnStudentMan extends javax.swing.JPanel {
             }
         });
 
+        lbEventInfo.setBackground(new java.awt.Color(0, 204, 51));
+        lbEventInfo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
         javax.swing.GroupLayout pnTop1Layout = new javax.swing.GroupLayout(pnTop1);
         pnTop1.setLayout(pnTop1Layout);
         pnTop1Layout.setHorizontalGroup(
@@ -95,15 +101,21 @@ public class pnStudentMan extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(btAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67))
+            .addGroup(pnTop1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(lbEventInfo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnTop1Layout.setVerticalGroup(
             pnTop1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTop1Layout.createSequentialGroup()
+            .addGroup(pnTop1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnTop1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btExport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(3, 3, 3)
+                .addComponent(lbEventInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -124,8 +136,9 @@ public class pnStudentMan extends javax.swing.JPanel {
         add(pnTop, java.awt.BorderLayout.PAGE_START);
 
         pnCenter.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 1, 1, 1));
-        pnCenter.setLayout(new java.awt.BorderLayout(30, 30));
+        pnCenter.setLayout(new java.awt.BorderLayout(70, 30));
 
+        tbStudent.setAutoCreateRowSorter(true);
         tbStudent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -137,6 +150,7 @@ public class pnStudentMan extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbStudent.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         scrollPane.setViewportView(tbStudent);
 
         pnCenter.add(scrollPane, java.awt.BorderLayout.CENTER);
@@ -165,6 +179,7 @@ public class pnStudentMan extends javax.swing.JPanel {
     private javax.swing.JButton btAdd;
     private javax.swing.JButton btExport;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lbEventInfo;
     private javax.swing.JPanel pnCenter;
     private javax.swing.JPanel pnTop;
     private javax.swing.JPanel pnTop1;

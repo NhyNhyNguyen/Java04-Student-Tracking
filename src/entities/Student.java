@@ -7,13 +7,8 @@ package entities;
 
 import common.StudentStatus;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
 
-/**
- *
- * @author qphan
- */
 public class Student {
 
     private int id;

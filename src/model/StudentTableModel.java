@@ -6,27 +6,31 @@
 package model;
 
 import entities.Student;
+import java.time.LocalDate;
 import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
-import jdk.nashorn.api.scripting.AbstractJSObject;
 import service.StudentService;
+import service.impl.StudentSeviceImpl;
 
 /**
  *
  * @author NHI
  */
-public class StudentModel extends AbstractTableModel {
+public class StudentTableModel extends AbstractTableModel {
     private List<Student> students;
     private final StudentService studentService;
-   private String[] cols = {"STT", "Họ tên", "Ngày sinh", "Giới tính", "Số điện thoại", "Nơi công tác", "Tình trạng"};
-    public StudentModel() {
-        this.studentService = new StudentService();
-        students = studentService.getStudent();
+   private String[] cols = {"STT", "Họ tên", "Ngày sinh", "Giới tính", "Số điện thoại", "Nơi công tác", "Tình trạng","Edit"};
+    public StudentTableModel() {
+        this.studentService = new StudentSeviceImpl();
+        students = studentService.getAllStudent();
+        System.err.println(students.size());
     }
 
     @Override
     public int getRowCount() {
-        return students.size();
+        return students.size() ;
     }
 
     @Override
@@ -44,14 +48,18 @@ public class StudentModel extends AbstractTableModel {
         if (cindex == 3) {
             return Boolean.class;
         }
+        if (cindex == 0) {
+            return Integer.class;
+        }
+        if(cindex ==7) return JButton.class;
         return super.getColumnClass(cindex);
     }
 
     @Override
-    public Object getValueAt(int row, int column) {
+    public Object getValueAt(int row, int col) {
         Object object = null;
         final Student student = students.get(row);
-        switch (column) {
+        switch (col) {
             case 0:
                 object = student.getId();
                 break;
@@ -59,7 +67,10 @@ public class StudentModel extends AbstractTableModel {
                 object = student.getFullname();
                 break;
             case 2:
-                object = student.getDateOfBirth();
+                final LocalDate lDate = student.getDateOfBirth();
+                
+                object = lDate !=null ? lDate : "__/__/__";
+                
                 break;
             case 3:
                 object = student.isGender();
@@ -73,8 +84,21 @@ public class StudentModel extends AbstractTableModel {
             case 6:
                 object = student.getStatus().getValue();
                 break;
+            case 7: 
+                object = new JButton();
         }
         return object;
+    }
+
+    public void firedTargeted(Student student) {
+        students.add(student);
+        fireTableDataChanged();
+    }
+
+    public void fireTargetEdit(int selectedRow, Student student, JTable tbStudent) {
+        int rowModel = tbStudent.convertRowIndexToModel(selectedRow);
+        students.set(rowModel, student);
+        fireTableRowsUpdated(rowModel, rowModel);
     }
 
     

@@ -16,18 +16,12 @@ import java.util.List;
  *
  * @author NHI
  */
-public class StudentService {
-    private final StudentDao dao;
+public interface StudentService {
+    List<Student> getAllStudent();
 
-    public StudentService() {
-        this.dao = new StudentDao();
-    }
-    public List<Student> getStudent(){
-        final List<Student> students = dao.getStudent();
-        if(!students.isEmpty()){
-            return students;
-        }
-        return Collections.EMPTY_LIST;
-    }
-    
+    public int save(Student student);
+
+    public Student getStudent(int id);
+
+    public int update(Student student);
 }

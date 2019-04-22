@@ -29,6 +29,7 @@ public class ImageUtils {
     public static final String TRANGCHU3_WHITE_PATH = "/icon_trangchu3_white_24dp.png";
 
     public static final String UNGDUNG_WHITE_PATH = "/images/icon_ung_dung_white_24dp.png";
+     public static final String  BKCIT_ICON_EDIT = "/images/icon_edit.gif";
 
     public static ImageIcon createIcon(final String path) {
         return new ImageIcon(ImageUtils.class.getResource(path));
